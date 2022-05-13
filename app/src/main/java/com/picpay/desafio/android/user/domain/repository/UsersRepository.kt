@@ -5,5 +5,5 @@ import kotlin.jvm.Throws
 
 internal interface UsersRepository {
     @Throws(Throwable::class)
-    suspend fun getContacts(forceUpdate: Boolean = false) : List<UserDto>?
+    suspend fun getContacts(forceUpdate: Boolean = false): List<UserDto>?
 }

@@ -8,14 +8,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 interface GetUsersUseCase {
-    suspend operator fun invoke(forceUpdate: Boolean = false) : Flow<Resource<out List<User>?>>
+    suspend operator fun invoke(forceUpdate: Boolean = false): Flow<Resource<out List<User>?>>
 }
 
 internal class GetUsersUseCaseImpl constructor(
     private val repository: UsersRepository
 ) : GetUsersUseCase {
     override suspend fun invoke(forceUpdate: Boolean) = flow {
-        try{
+        try {
             emit(Resource.Loading())
 
             val repositoryResult = repository.getContacts(forceUpdate)
