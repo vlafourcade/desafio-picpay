@@ -1,14 +1,13 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
-package com.picpay.desafio.android.contact.domain.usecase
+package com.picpay.desafio.android.user.domain.usecase
 
 import android.os.Build
-import com.picpay.desafio.android.contact.domain.model.dto.ContactDto
-import com.picpay.desafio.android.contact.domain.repository.ContactsRepository
+import com.picpay.desafio.android.user.domain.model.dto.UserDto
+import com.picpay.desafio.android.user.domain.repository.UsersRepository
 import com.picpay.desafio.android.core.processing.model.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
 import org.junit.Before
@@ -22,23 +21,23 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.KITKAT, Build.VERSION_CODES.LOLLIPOP, Build.VERSION_CODES.P])
-class GetContactsUseCaseTest {
+class GetUsersUseCaseTest {
     @Mock
-    private lateinit var repository: ContactsRepository
+    private lateinit var repository: UsersRepository
 
-    private lateinit var useCase: GetContactsUseCase
+    private lateinit var useCase: GetUsersUseCase
 
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this@GetContactsUseCaseTest)
+        MockitoAnnotations.openMocks(this@GetUsersUseCaseTest)
 
-        useCase = GetContactsUseCaseImpl(repository)
+        useCase = GetUsersUseCaseImpl(repository)
     }
 
     @Test
-    fun testGetContactsWithSuccess() = runBlockingTest {
+    fun testGetUsersWithSuccess() = runBlockingTest {
         val mockedResult = listOf(
-            ContactDto(1, "img_url", "First Contact", "first_contact")
+            UserDto(1, "img_url", "First User", "first_user")
         )
 
         `when`(repository.getContacts()).thenReturn(mockedResult)
@@ -52,8 +51,8 @@ class GetContactsUseCaseTest {
                     with(it.data?.first()) {
                         Assert.assertEquals(1, this?.id)
                         Assert.assertEquals("img_url", this?.img)
-                        Assert.assertEquals("First Contact", this?.name)
-                        Assert.assertEquals("first_contact", this?.username)
+                        Assert.assertEquals("First User", this?.name)
+                        Assert.assertEquals("first_user", this?.username)
                     }
                 }
                 is Resource.Error -> { Assert.fail() }
@@ -63,7 +62,7 @@ class GetContactsUseCaseTest {
     }
 
     @Test
-    fun testGetContactsWithError() = runBlockingTest {
+    fun testGetUsersWithError() = runBlockingTest {
         `when`(
             repository.getContacts()
         ).thenThrow(Throwable::class.java)

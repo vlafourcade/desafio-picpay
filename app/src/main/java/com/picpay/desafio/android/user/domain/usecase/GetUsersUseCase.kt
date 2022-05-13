@@ -1,19 +1,19 @@
-package com.picpay.desafio.android.contact.domain.usecase
+package com.picpay.desafio.android.user.domain.usecase
 
-import com.picpay.desafio.android.contact.domain.mapper.toModel
-import com.picpay.desafio.android.contact.domain.model.Contact
-import com.picpay.desafio.android.contact.domain.repository.ContactsRepository
+import com.picpay.desafio.android.user.domain.mapper.toModel
+import com.picpay.desafio.android.user.domain.model.User
+import com.picpay.desafio.android.user.domain.repository.UsersRepository
 import com.picpay.desafio.android.core.processing.model.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-interface GetContactsUseCase {
-    suspend operator fun invoke(forceUpdate: Boolean = false) : Flow<Resource<out List<Contact>?>>
+interface GetUsersUseCase {
+    suspend operator fun invoke(forceUpdate: Boolean = false) : Flow<Resource<out List<User>?>>
 }
 
-internal class GetContactsUseCaseImpl constructor(
-    private val repository: ContactsRepository
-) : GetContactsUseCase {
+internal class GetUsersUseCaseImpl constructor(
+    private val repository: UsersRepository
+) : GetUsersUseCase {
     override suspend fun invoke(forceUpdate: Boolean) = flow {
         try{
             emit(Resource.Loading())

@@ -1,6 +1,6 @@
-package com.picpay.desafio.android.contact.domain.model.dto
+package com.picpay.desafio.android.user.domain.model.dto
 
-data class ContactDto(
+data class UserDto(
     val id: Int,
     val img: String,
     val name: String,
