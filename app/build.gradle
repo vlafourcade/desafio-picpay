@@ -29,6 +29,19 @@ android {
         }
     }
 
+    flavorDimensions "environment"
+    productFlavors {
+        prod {
+            buildConfigField "String", "BASE_URL", "\"https://URL\""
+        }
+        staging {
+            buildConfigField "String", "BASE_URL", "\"https://URL\""
+        }
+        develop {
+            buildConfigField "String", "BASE_URL", "\"https://URL\""
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

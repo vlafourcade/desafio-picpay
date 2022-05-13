@@ -22,6 +22,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "environment"
+    productFlavors {
+        prod {
+            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/\""
+        }
+        staging {
+            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/users\""
+        }
+        develop {
+            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/users\""
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

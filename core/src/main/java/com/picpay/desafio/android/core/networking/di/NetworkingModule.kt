@@ -1,5 +1,6 @@
 package com.picpay.desafio.android.core.networking.di
 
+import com.picpay.desafio.android.core.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,7 @@ internal class NetworkingModule {
         Retrofit
             .Builder()
             .client(client)
-            //.baseUrl()
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }
