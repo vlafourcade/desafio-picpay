@@ -8,8 +8,9 @@ import com.picpay.desafio.android.user.data.mapper.toEntity
 import com.picpay.desafio.android.user.data.remote.UsersApi
 import com.picpay.desafio.android.user.domain.model.dto.UserDto
 import com.picpay.desafio.android.user.domain.repository.UsersRepository
+import javax.inject.Inject
 
-internal class UsersRepositoryImpl constructor(
+internal class UsersRepositoryImpl @Inject constructor(
     private val api: UsersApi,
     private val dao: UsersDao,
     private val localStorage: LocalStorage
