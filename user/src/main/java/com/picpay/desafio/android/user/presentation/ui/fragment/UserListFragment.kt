@@ -56,6 +56,11 @@ class UserListFragment @Inject constructor() : Fragment() {
             setHasFixedSize(true)
             adapter = userAdapter
         }
+
+        binding.srlContainer.setOnRefreshListener {
+            binding.srlContainer.isRefreshing = false
+            viewModel.fetchData(forceUpdate = true)
+        }
     }
 
     private fun setupObservers() {
