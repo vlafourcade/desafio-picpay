@@ -17,14 +17,12 @@ import retrofit2.Retrofit
 
 @Module(
     includes = [
-        AbstractDataModule::class
+        AbstractDataModule::class,
+        ApiModule::class
     ]
 )
 @InstallIn(ViewModelComponent::class)
 internal class DataModule {
-    @Provides
-    fun provideApi(retrofit: Retrofit): UsersApi = retrofit.create(UsersApi::class.java)
-
     @Provides
     fun provideDatabase(application: Application): UserDatabase =
         Room.databaseBuilder(application, UserDatabase::class.java, "users_database").build()

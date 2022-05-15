@@ -52,6 +52,7 @@ internal class UserAdapterImpl @Inject constructor(
             imageLoader.loadImage(
                 binding.picture,
                 user.img,
+                R.drawable.ic_round_account_circle,
                 R.drawable.ic_round_account_circle
             )
         }
