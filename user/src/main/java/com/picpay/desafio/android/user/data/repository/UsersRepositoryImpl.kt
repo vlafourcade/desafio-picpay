@@ -1,6 +1,5 @@
 package com.picpay.desafio.android.user.data.repository
 
-import android.os.SystemClock
 import com.picpay.desafio.android.core.data.local.LocalStorage
 import com.picpay.desafio.android.user.data.local.UsersDao
 import com.picpay.desafio.android.user.data.mapper.toDto
@@ -23,7 +22,7 @@ internal class UsersRepositoryImpl @Inject constructor(
                 val result = api.getUsers()?.map { it.toEntity() }
                 result?.let {
                     dao.insertAll(it)
-                    localStorage.put(USER_UPDATE_TIME_STORAGE_KEY, SystemClock.elapsedRealtime())
+                    localStorage.put(USER_UPDATE_TIME_STORAGE_KEY, System.currentTimeMillis())
                 }
             }
 
