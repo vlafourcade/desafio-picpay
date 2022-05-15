@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.picpay.desafio.android.core.utils.image.ImageLoader
+import com.picpay.desafio.android.user.R
 import com.picpay.desafio.android.user.databinding.LayoutUserItemBinding
 import com.picpay.desafio.android.user.domain.model.User
 import javax.inject.Inject
@@ -11,12 +13,14 @@ import javax.inject.Inject
 internal abstract class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     abstract fun setDataSource(dataSource: List<User>)
 
-    abstract class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    abstract class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         abstract fun bind(user: User)
     }
 }
 
-internal class UserAdapterImpl @Inject constructor() : UserAdapter() {
+internal class UserAdapterImpl @Inject constructor(
+    private val imageLoader: ImageLoader
+) : UserAdapter() {
     private var dataSource: List<User> = listOf()
 
     override fun setDataSource(dataSource: List<User>) {
@@ -29,7 +33,7 @@ internal class UserAdapterImpl @Inject constructor() : UserAdapter() {
 
         val binding = LayoutUserItemBinding.inflate(inflater, parent, false)
 
-        return ViewHolder(binding)
+        return ViewHolder(binding, imageLoader)
     }
 
     override fun onBindViewHolder(holder: UserAdapter.ViewHolder, position: Int) {
@@ -38,10 +42,18 @@ internal class UserAdapterImpl @Inject constructor() : UserAdapter() {
 
     override fun getItemCount(): Int = dataSource.size
 
-    class ViewHolder (private val binding: LayoutUserItemBinding)
-        : UserAdapter.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: LayoutUserItemBinding,
+        private val imageLoader: ImageLoader
+    ) : UserAdapter.ViewHolder(binding.root) {
         override fun bind(user: User) {
             binding.user = user
+
+            imageLoader.loadImage(
+                binding.picture,
+                user.img,
+                R.drawable.ic_round_account_circle
+            )
         }
     }
 
