@@ -15,8 +15,4 @@ import javax.inject.Named
     ]
 )
 @InstallIn(SingletonComponent::class)
-class InvestmentModule {
-    @Provides
-    @Named("IO")
-    fun provideCoroutinesDispatcherIO(): CoroutineDispatcher = Dispatchers.IO
-}
+class UserModule

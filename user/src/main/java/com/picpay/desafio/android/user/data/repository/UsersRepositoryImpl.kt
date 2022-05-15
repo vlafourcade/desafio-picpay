@@ -19,7 +19,7 @@ internal class UsersRepositoryImpl @Inject constructor(
 
     override suspend fun getContacts(forceUpdate: Boolean): List<UserDto>? {
         try {
-            if (shouldFetchData(forceUpdate)) {
+            if (forceUpdate) {
                 val result = api.getUsers()?.map { it.toEntity() }
                 result?.let {
                     dao.insertAll(it)
@@ -35,9 +35,6 @@ internal class UsersRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun shouldFetchData(forceUpdate: Boolean) = forceUpdate || (
-            localStorage.get(
-                USER_UPDATE_TIME_STORAGE_KEY,
-                Long::class.java
-            ) ?: 0 < SystemClock.elapsedRealtime())
+    override suspend fun getLatestRefreshTime(): Long =
+        localStorage.get(USER_UPDATE_TIME_STORAGE_KEY, Long::class.java) ?: 0
 }

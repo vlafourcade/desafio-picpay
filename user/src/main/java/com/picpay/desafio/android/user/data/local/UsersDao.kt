@@ -12,5 +12,5 @@ interface UsersDao {
     fun getAll(): List<UserEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg users: List<UserEntity>)
+    fun insertAll(users: List<UserEntity>)
 }

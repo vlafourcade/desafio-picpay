@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.picpay.desafio.android.user.databinding.LayoutUserItemBinding
 import com.picpay.desafio.android.user.domain.model.User
+import javax.inject.Inject
 
 internal abstract class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     abstract fun setDataSource(dataSource: List<User>)
@@ -15,7 +16,7 @@ internal abstract class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolde
     }
 }
 
-internal class UserAdapterImpl : UserAdapter() {
+internal class UserAdapterImpl @Inject constructor() : UserAdapter() {
     private var dataSource: List<User> = listOf()
 
     override fun setDataSource(dataSource: List<User>) {

@@ -1,8 +1,7 @@
 package com.picpay.desafio.android.core.data.local
 
-import android.content.Context
 import android.content.SharedPreferences
-import com.google.gson.GsonBuilder
+import com.google.gson.Gson
 import java.io.Serializable
 import java.lang.Exception
 
@@ -15,13 +14,9 @@ interface LocalStorage {
 }
 
 internal class LocalStorageImpl constructor(
-    context: Context,
-    storageName: String
+    private val storage: SharedPreferences,
+    private val serializer: Gson
 ) : LocalStorage {
-    private val serializer = GsonBuilder().serializeNulls().create()
-
-    private val storage: SharedPreferences = context.getSharedPreferences(storageName, Context.MODE_PRIVATE)
-
     override fun <T : Serializable> put(key: String, data: T) {
         storage.edit().putString(key, serializer.toJson(data)).apply()
     }

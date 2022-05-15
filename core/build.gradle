@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 23
+        minSdk 21
         targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,10 +29,10 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/\""
         }
         staging {
-            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/users\""
+            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/\""
         }
         develop {
-            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/users\""
+            buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/\""
         }
     }
 
@@ -65,4 +65,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 }

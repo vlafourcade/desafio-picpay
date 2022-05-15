@@ -12,6 +12,7 @@ import com.picpay.desafio.android.core.di.factory.ViewModelFactory
 import com.picpay.desafio.android.user.databinding.FragmentUserListBinding
 import com.picpay.desafio.android.user.presentation.adapter.UserAdapter
 import com.picpay.desafio.android.user.presentation.viewmodel.ListUsersViewModel
+import com.picpay.desafio.android.user.presentation.viewmodel.ListUsersViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,7 +26,7 @@ class UserListFragment @Inject constructor() : Fragment() {
     private lateinit var binding: FragmentUserListBinding
 
     @Inject
-    internal lateinit var adapter: UserAdapter
+    internal lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,20 +46,22 @@ class UserListFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
+
+        viewModel.fetchData()
     }
 
     private fun configureLayout() {
         binding.rvUsers.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            adapter = adapter
+            adapter = userAdapter
         }
     }
 
     private fun setupObservers() {
         viewModel.data.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { data ->
-                adapter.setDataSource(data)
+                userAdapter.setDataSource(data)
             }
         }
 

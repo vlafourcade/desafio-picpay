@@ -1,5 +1,6 @@
 package com.picpay.desafio.android.user.domain.usecase
 
+import android.os.SystemClock
 import com.picpay.desafio.android.user.domain.mapper.toModel
 import com.picpay.desafio.android.user.domain.model.User
 import com.picpay.desafio.android.user.domain.repository.UsersRepository
@@ -19,7 +20,9 @@ internal class GetUsersUseCaseImpl @Inject constructor(
         try {
             emit(Resource.Loading())
 
-            val repositoryResult = repository.getContacts(forceUpdate)
+            val shouldRefresh = shouldRefreshData(forceUpdate)
+
+            val repositoryResult = repository.getContacts(shouldRefresh)
 
             val result = repositoryResult?.map { it.toModel() }
 
@@ -28,4 +31,7 @@ internal class GetUsersUseCaseImpl @Inject constructor(
             emit(Resource.Error(throwable, null))
         }
     }
+
+    private suspend fun shouldRefreshData(forceUpdate: Boolean) =
+        forceUpdate || repository.getLatestRefreshTime() < SystemClock.elapsedRealtime()
 }

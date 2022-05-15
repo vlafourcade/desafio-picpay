@@ -8,13 +8,14 @@ import com.picpay.desafio.android.core.processing.model.Resource
 import com.picpay.desafio.android.core.utils.livedata.Event
 import com.picpay.desafio.android.user.domain.model.User
 import com.picpay.desafio.android.user.domain.usecase.GetUsersUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
-abstract class ListUsersViewModel : ViewModel() {
+internal abstract class ListUsersViewModel: ViewModel() {
     abstract val data: LiveData<Event<List<User>?>>
 
     abstract val error: LiveData<Event<Throwable?>>
@@ -23,6 +24,7 @@ abstract class ListUsersViewModel : ViewModel() {
 
     abstract fun fetchData(forceUpdate: Boolean = false)
 }
+
 internal class ListUsersViewModelImpl @Inject constructor(
     private val getUsersUseCase: GetUsersUseCase,
     @Named("IO") private val coroutineDispatcher: CoroutineDispatcher
