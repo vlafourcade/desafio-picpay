@@ -21,5 +21,5 @@ internal abstract class PresentationModule {
     abstract fun bindListUsersViewModel(viewModel: ListUsersViewModelImpl): ViewModel
 
     @Binds
-    abstract fun bindUserAdapter(adapter: UserAdapterImpl) : UserAdapter
+    abstract fun bindUserAdapter(adapter: UserAdapterImpl): UserAdapter
 }

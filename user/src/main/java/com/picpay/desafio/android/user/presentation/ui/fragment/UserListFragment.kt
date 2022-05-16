@@ -12,7 +12,6 @@ import com.picpay.desafio.android.core.di.factory.ViewModelFactory
 import com.picpay.desafio.android.user.databinding.FragmentUserListBinding
 import com.picpay.desafio.android.user.presentation.adapter.UserAdapter
 import com.picpay.desafio.android.user.presentation.viewmodel.ListUsersViewModel
-import com.picpay.desafio.android.user.presentation.viewmodel.ListUsersViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

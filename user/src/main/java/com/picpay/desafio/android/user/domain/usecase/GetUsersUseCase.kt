@@ -1,9 +1,9 @@
 package com.picpay.desafio.android.user.domain.usecase
 
+import com.picpay.desafio.android.core.processing.model.Resource
 import com.picpay.desafio.android.user.domain.mapper.toModel
 import com.picpay.desafio.android.user.domain.model.User
 import com.picpay.desafio.android.user.domain.repository.UsersRepository
-import com.picpay.desafio.android.core.processing.model.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -24,7 +24,7 @@ internal class GetUsersUseCaseImpl @Inject constructor(
 
             val shouldRefresh = shouldRefreshData(forceUpdate)
 
-            val repositoryResult = repository.getContacts(shouldRefresh)
+            val repositoryResult = repository.fetchData(shouldRefresh)
 
             val result = repositoryResult?.map { it.toModel() }
 

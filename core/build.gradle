@@ -32,7 +32,7 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/\""
         }
         develop {
-            buildConfigField "String", "BASE_URL", "\""
+            buildConfigField "String", "BASE_URL", "\"\""
         }
     }
 

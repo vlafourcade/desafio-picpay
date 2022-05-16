@@ -1,11 +1,8 @@
 package com.picpay.desafio.android.user.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.picpay.desafio.android.user.data.local.UserDatabase
-import com.picpay.desafio.android.user.data.remote.UsersApi
 import com.picpay.desafio.android.user.data.repository.UsersRepositoryImpl
 import com.picpay.desafio.android.user.domain.repository.UsersRepository
 import dagger.Binds
@@ -13,7 +10,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import retrofit2.Retrofit
 
 @Module(
     includes = [
