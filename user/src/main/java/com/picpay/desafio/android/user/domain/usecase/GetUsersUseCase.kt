@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 interface GetUsersUseCase {
-    suspend operator fun invoke(forceUpdate: Boolean = false): Flow<Resource<out List<User>?>>
+    suspend operator fun invoke(
+        forceUpdate: Boolean = false
+    ): Flow<Resource<out List<User>?>>
 }
 
 internal class GetUsersUseCaseImpl @Inject constructor(
@@ -25,7 +27,9 @@ internal class GetUsersUseCaseImpl @Inject constructor(
             val shouldRefresh = shouldRefreshData(forceUpdate)
 
             val repositoryResult =
-                repository.getContacts(forceUpdate = shouldRefresh, ignoreApiErrors = true)
+                repository.getContacts(
+                    forceUpdate = shouldRefresh
+                )
 
             val result = repositoryResult?.map { it.toModel() }
 

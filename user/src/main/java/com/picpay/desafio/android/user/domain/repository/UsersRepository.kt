@@ -5,7 +5,7 @@ import com.picpay.desafio.android.core.data.repository.BaseRepository
 import com.picpay.desafio.android.user.domain.model.dto.UserDto
 
 internal abstract class UsersRepository : BaseRepository() {
-    @Throws(ApiError::class)
+    @Throws(ApiError::class, Throwable::class)
     abstract suspend fun getContacts(
         forceUpdate: Boolean = false,
         ignoreApiErrors: Boolean = true

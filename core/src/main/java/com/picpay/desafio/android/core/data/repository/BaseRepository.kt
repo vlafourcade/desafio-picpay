@@ -5,7 +5,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 open class BaseRepository {
-    protected fun parseApiError(throwable: Throwable): ApiError {
+    fun parseApiError(throwable: Throwable): ApiError {
         return when (throwable) {
             is IOException -> ApiError.InternetUnavailable
             is HttpException -> {

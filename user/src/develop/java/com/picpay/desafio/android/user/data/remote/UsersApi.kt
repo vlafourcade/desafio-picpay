@@ -2,8 +2,12 @@ package com.picpay.desafio.android.user.data.remote
 
 import com.picpay.desafio.android.user.data.model.UserResponse
 import kotlinx.coroutines.delay
+import kotlin.jvm.Throws
 
 internal interface UsersApi {
+    @Throws(
+        Throwable::class
+    )
     suspend fun getUsers(): List<UserResponse>?
 }
 
