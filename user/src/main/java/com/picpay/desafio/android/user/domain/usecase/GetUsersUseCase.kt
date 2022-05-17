@@ -24,7 +24,8 @@ internal class GetUsersUseCaseImpl @Inject constructor(
 
             val shouldRefresh = shouldRefreshData(forceUpdate)
 
-            val repositoryResult = repository.fetchData(shouldRefresh)
+            val repositoryResult =
+                repository.getContacts(forceUpdate = shouldRefresh, ignoreApiErrors = true)
 
             val result = repositoryResult?.map { it.toModel() }
 

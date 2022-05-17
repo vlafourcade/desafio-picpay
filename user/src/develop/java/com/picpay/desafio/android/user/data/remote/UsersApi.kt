@@ -9,7 +9,7 @@ internal interface UsersApi {
 
 internal class UsersMockApi : UsersApi {
     override suspend fun getUsers(): List<UserResponse>? {
-        delay(20000)
+        delay(5000)
 
         val result = mutableListOf<UserResponse>()
 
