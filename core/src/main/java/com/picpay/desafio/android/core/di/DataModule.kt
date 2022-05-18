@@ -9,11 +9,11 @@ import com.picpay.desafio.android.core.data.local.LocalStorageImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 internal class DataModule {
     @Provides
     fun provideDefaultSharedPreferences(@ApplicationContext appContext: Context): SharedPreferences =
