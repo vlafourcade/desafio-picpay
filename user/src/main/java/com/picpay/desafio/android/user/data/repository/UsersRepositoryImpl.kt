@@ -10,6 +10,7 @@ import com.picpay.desafio.android.user.domain.model.dto.UserDto
 import com.picpay.desafio.android.user.domain.repository.UsersRepository
 import javax.inject.Inject
 
+@Suppress("VariableNaming")
 internal class UsersRepositoryImpl @Inject constructor(
     private val api: UsersApi,
     private val dao: UsersDao,
@@ -18,6 +19,7 @@ internal class UsersRepositoryImpl @Inject constructor(
 ) : UsersRepository() {
     private val USER_UPDATE_TIME_STORAGE_KEY: String = "USER_UPDATE_TIME_STORAGE_KEY"
 
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun getContacts(
         forceUpdate: Boolean,
         ignoreApiErrors: Boolean

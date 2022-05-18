@@ -10,7 +10,13 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.KITKAT, Build.VERSION_CODES.LOLLIPOP, Build.VERSION_CODES.P])
+@Config(
+    sdk = [
+        Build.VERSION_CODES.JELLY_BEAN,
+        Build.VERSION_CODES.KITKAT,
+        Build.VERSION_CODES.LOLLIPOP,
+        Build.VERSION_CODES.P]
+)
 class UserResponseMapperTest {
     @Test
     fun mapResponseToEntityTest() {

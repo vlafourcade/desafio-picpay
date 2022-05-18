@@ -14,12 +14,12 @@ import dagger.multibindings.IntoMap
 
 @Module
 @InstallIn(FragmentComponent::class)
-internal abstract class PresentationModule {
+internal interface PresentationModule {
     @Binds
     @IntoMap
     @ViewModelKey(ListUsersViewModel::class)
-    abstract fun bindListUsersViewModel(viewModel: ListUsersViewModelImpl): ViewModel
+    fun bindListUsersViewModel(viewModel: ListUsersViewModelImpl): ViewModel
 
     @Binds
-    abstract fun bindUserAdapter(adapter: UserAdapterImpl): UserAdapter
+    fun bindUserAdapter(adapter: UserAdapterImpl): UserAdapter
 }

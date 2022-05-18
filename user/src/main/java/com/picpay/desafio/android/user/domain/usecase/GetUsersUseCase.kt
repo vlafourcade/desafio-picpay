@@ -14,12 +14,14 @@ interface GetUsersUseCase {
     ): Flow<Resource<out List<User>?>>
 }
 
+@Suppress("VariableNaming", "MagicNumber")
 internal class GetUsersUseCaseImpl @Inject constructor(
     private val repository: UsersRepository
 ) : GetUsersUseCase {
     // 5 minutes of cache
-    private val CACHE_TIME = 5 * 60 * 1000
+    private val CACHE_TIME: Int = 5 * 60 * 1000
 
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun invoke(forceUpdate: Boolean) = flow {
         try {
             emit(Resource.Loading())

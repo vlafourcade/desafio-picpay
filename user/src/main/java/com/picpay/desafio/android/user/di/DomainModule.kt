@@ -9,8 +9,8 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal abstract class DomainModule {
+internal interface DomainModule {
     @Binds
-    abstract fun bindsGetUsersUseCase(implementation: GetUsersUseCaseImpl):
+    fun bindsGetUsersUseCase(implementation: GetUsersUseCaseImpl):
             GetUsersUseCase
 }

@@ -1,6 +1,11 @@
 package com.picpay.desafio.android.user.presentation.viewmodel
 
-import androidx.lifecycle.*
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.picpay.desafio.android.core.processing.model.Resource
 import com.picpay.desafio.android.core.utils.livedata.Event
 import com.picpay.desafio.android.user.domain.model.User

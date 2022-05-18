@@ -29,8 +29,8 @@ internal class DataModule {
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal abstract class AbstractDataModule {
+internal interface AbstractDataModule {
     @Binds
-    abstract fun bindsRepository(implementation: UsersRepositoryImpl):
+    fun bindsRepository(implementation: UsersRepositoryImpl):
             UsersRepository
 }

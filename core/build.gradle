@@ -74,5 +74,5 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "org.mockito:mockito-inline:$mockito_version"
 
-    api 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:$okhttp3_idling_resource_version"
 }
