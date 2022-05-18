@@ -1,3 +1,4 @@
 <resources>
     <string name="title">Contatos</string>
+    <string name="empty_list">Não foram encontrados contatos.</string>
 </resources>

@@ -73,4 +73,6 @@ dependencies {
     testImplementation "org.robolectric:robolectric:$robolectric_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "org.mockito:mockito-inline:$mockito_version"
+
+    api 'androidx.test.espresso:espresso-idling-resource:3.4.0'
 }

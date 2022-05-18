@@ -1,9 +1,6 @@
 package com.picpay.desafio.android.user.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.picpay.desafio.android.core.processing.model.Resource
 import com.picpay.desafio.android.core.utils.livedata.Event
 import com.picpay.desafio.android.user.domain.model.User
@@ -16,6 +13,8 @@ import javax.inject.Named
 
 internal abstract class ListUsersViewModel : ViewModel() {
     abstract val data: LiveData<Event<List<User>?>>
+
+    abstract val isEmpty: LiveData<Boolean>
 
     abstract val error: LiveData<Event<Throwable?>>
 
@@ -30,7 +29,19 @@ internal class ListUsersViewModelImpl @Inject constructor(
 ) : ListUsersViewModel() {
     override val isLoading = MutableLiveData(false)
     override val data = MutableLiveData<Event<List<User>?>>()
+    override val isEmpty = MediatorLiveData<Boolean>()
     override val error = MutableLiveData<Event<Throwable?>>()
+
+    init {
+        with(isEmpty){
+            addSource(data) {
+                isEmpty.postValue(it.peekContent()?.isEmpty() ?: true)
+            }
+            addSource(isLoading) {
+                isEmpty.postValue(it.not())
+            }
+        }
+    }
 
     override fun fetchData(forceUpdate: Boolean) {
         viewModelScope.launch(coroutineDispatcher) {

@@ -14,4 +14,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ScreenContentTextView" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">21sp</item>
+    </style>
+
 </resources>

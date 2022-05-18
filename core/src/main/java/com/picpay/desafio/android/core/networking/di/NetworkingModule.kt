@@ -1,6 +1,5 @@
 package com.picpay.desafio.android.core.networking.di
 
-import com.picpay.desafio.android.core.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,6 +17,7 @@ internal class NetworkingModule {
     fun provideHttpClient(): OkHttpClient =
         OkHttpClient
             .Builder()
+            .retryOnConnectionFailure(true)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
@@ -24,12 +25,12 @@ internal class NetworkingModule {
 
     @Provides
     fun provideRetrofit(
-        client: OkHttpClient
+        client: OkHttpClient, @Named("baseUrl") baseUrl: String,
     ): Retrofit =
         Retrofit
             .Builder()
             .client(client)
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }

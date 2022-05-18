@@ -1,15 +1,15 @@
 package com.picpay.desafio.android.core.data.model
 
-sealed class ApiError: Throwable() {
+sealed class ApiError : Throwable() {
     object InternetUnavailable : ApiError()
 
-    object BadRequest: ApiError()
+    object BadRequest : ApiError()
 
-    object NotFound: ApiError()
+    object NotFound : ApiError()
 
-    object Unauthorized: ApiError()
+    object Unauthorized : ApiError()
 
-    object ServiceUnavailable: ApiError()
+    object ServiceUnavailable : ApiError()
 
-    object Unknown: ApiError()
+    object Unknown : ApiError()
 }
