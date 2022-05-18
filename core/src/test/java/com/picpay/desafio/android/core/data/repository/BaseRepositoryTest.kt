@@ -23,7 +23,18 @@ class BaseRepositoryTest {
 
     @Test
     fun parseUnknownErrorTest() {
-        val result = baseRepository.parseApiError(Throwable())
+        var result = baseRepository.parseApiError(Throwable())
+
+        Assert.assertTrue(result is ApiError.Unknown)
+
+        result = baseRepository.parseApiError(
+            HttpException(
+                Response.error<ResponseBody>(
+                    407,
+                    "content".toResponseBody("plain/text".toMediaTypeOrNull())
+                )
+            )
+        )
 
         Assert.assertTrue(result is ApiError.Unknown)
     }

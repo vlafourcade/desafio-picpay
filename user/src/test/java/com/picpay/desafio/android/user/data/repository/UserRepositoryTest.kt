@@ -5,6 +5,7 @@ package com.picpay.desafio.android.user.data.repository
 import android.os.Build
 import com.picpay.desafio.android.core.data.local.LocalStorage
 import com.picpay.desafio.android.core.data.model.ApiError
+import com.picpay.desafio.android.core.utils.logging.Logger
 import com.picpay.desafio.android.user.data.local.UsersDao
 import com.picpay.desafio.android.user.data.model.UserEntity
 import com.picpay.desafio.android.user.data.model.UserResponse
@@ -20,7 +21,6 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(
@@ -40,6 +40,9 @@ class UserRepositoryTest {
     @Mock
     private lateinit var localStorage: LocalStorage
 
+    @Mock
+    private lateinit var logger: Logger
+
     private lateinit var repository: UsersRepositoryImpl
 
     @Before
@@ -49,7 +52,8 @@ class UserRepositoryTest {
         repository = UsersRepositoryImpl(
             api = api,
             dao = dao,
-            localStorage = localStorage
+            localStorage = localStorage,
+            logger = logger
         )
     }
 
@@ -117,7 +121,13 @@ class UserRepositoryTest {
 
     @Test
     fun getDataIgnoringApiErrorTest() = runBlockingTest {
-        `when`(api.getUsers()).thenThrow(Throwable::class.java)
+        val errorMessage = "Error message"
+        val error = mock((Throwable::class.java))
+        `when`(error.localizedMessage).then { errorMessage }
+
+        `when`(logger.e(errorMessage, error)).then {  }
+
+        `when`(api.getUsers()).thenThrow(error)
         `when`(dao.getAll()).thenReturn(
             listOf(
                 UserEntity(
@@ -143,7 +153,13 @@ class UserRepositoryTest {
 
     @Test(expected = ApiError.Unknown::class)
     fun getDataWithApiErrorTest() = runBlockingTest {
-        `when`(api.getUsers()).thenThrow(Throwable::class.java)
+        val errorMessage = "Error message"
+        val error = mock((Throwable::class.java))
+        `when`(error.localizedMessage).then { errorMessage }
+
+        `when`(logger.e(errorMessage, error)).then {  }
+
+        `when`(api.getUsers()).thenThrow(error)
 
         repository.getContacts(forceUpdate = true, ignoreApiErrors = false)
     }
