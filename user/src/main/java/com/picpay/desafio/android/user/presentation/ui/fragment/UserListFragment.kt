@@ -45,8 +45,6 @@ class UserListFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
-
-        viewModel.fetchData()
     }
 
     private fun configureLayout() {
@@ -64,7 +62,7 @@ class UserListFragment @Inject constructor() : Fragment() {
 
     private fun setupObservers() {
         viewModel.data.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { data ->
+            it?.let { data ->
                 userAdapter.setDataSource(data)
             }
         }

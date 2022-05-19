@@ -17,7 +17,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 internal abstract class ListUsersViewModel : ViewModel() {
-    abstract val data: LiveData<Event<List<User>?>>
+    abstract val data: LiveData<List<User>?>
 
     abstract val isEmpty: LiveData<Boolean>
 
@@ -33,19 +33,21 @@ internal class ListUsersViewModelImpl @Inject constructor(
     @Named("IO") private val coroutineDispatcher: CoroutineDispatcher
 ) : ListUsersViewModel() {
     override val isLoading = MutableLiveData(false)
-    override val data = MutableLiveData<Event<List<User>?>>()
+    override val data = MutableLiveData<List<User>?>()
     override val isEmpty = MediatorLiveData<Boolean>()
     override val error = MutableLiveData<Event<Throwable?>>()
 
     init {
         with(isEmpty){
             addSource(data) {
-                isEmpty.postValue(it.peekContent()?.isEmpty() ?: true)
+                isEmpty.postValue(it?.isEmpty() ?: true)
             }
             addSource(isLoading) {
                 isEmpty.postValue(it.not())
             }
         }
+
+        fetchData()
     }
 
     override fun fetchData(forceUpdate: Boolean) {
@@ -55,7 +57,7 @@ internal class ListUsersViewModelImpl @Inject constructor(
                     is Resource.Loading -> isLoading.postValue(true)
                     is Resource.Success -> {
                         isLoading.postValue(false)
-                        data.postValue(Event(it.data))
+                        data.postValue(it.data)
                     }
                     is Resource.Error -> {
                         isLoading.postValue(false)
